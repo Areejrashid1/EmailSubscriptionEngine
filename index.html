@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Subscription with google sheets</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="herocontainer">
+    <div id="content">
+        <h2 style="font-weight:100;margin-bottom:10%">Coming Soon!</h2>
+        <h1 style="font-size:35px" >Our Brand New Website Is On It's Way</h1>
+        <h5 style="font-weight:100; margin-bottom:8%">Subscribe for more details</h5>
+        <div class="bar">
+            <form action="post" id="submitBar" name="submit-to-google-sheet">
+                <div class="submitbar">
+                    <input type="email" name="email" id="email" placeholder="Your email id" style="padding:5%">
+                        <button type="submit" id="sendicon"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <script>
+	const scriptURL = 'https://script.google.com/macros/s/AKfycbynUHP_6unqRXWNsaVssZttaapNoXbtvYR5xqyqj7tiyxSwlNF7nsnmEpmckW5SdFvLtQ/exec'
+	const form = document.forms['submit-to-google-sheet']
+
+	form.addEventListener('submit', e => {
+		e.preventDefault()
+		fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+			.then(response => response.json())
+			.then(response => console.log('Success!', response))
+			.catch(error => console.error('Error!', error.message))
+	})
+</script>
+
+</body>
+
+</html>
